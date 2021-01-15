@@ -29,48 +29,48 @@ int isleap(int year){
 	return 0;
 }
 
-
-Date After(Date x, int n)
+Date After(Date x, int n)	// return date after n-days
 {
-	int i;
-	Date d=x;
-	int days = x.day;
-
-	for(i=0;i<x.month;i++){
-		days += mDays[isleap(x.year)][i];
+	x.day += n;
+	while(x.day > mDays[isleap(x.year)][x.month])
+	{
+		x.day -= mDays[isleap(x.year)][x.month];
+		x.month++;
 	}
 
-	// do while로 확인해보자 눈아파서 더 보기 싫어^&^
+	return x;
+}	
 
-	for(days+n; days > mDays[isleap(d.year)][d.month]; days -= mDays[isleap(d.year)][d.month]){
-		if(d.month<12)
-			d.month++;
-		else {
-			d.month=1;
-			d.year++;
+
+Date Before(Date x, int n)
+{
+	while(x.day < n)
+	{
+		if(x.month==1){
+			x.year-=1;
+			x.month+=12;
 		}
-		d.day = days;
+		x.day += mDays[isleap(x.year)][--x.month];
 	}
+	x.day-=n;
 
-	return d;
-
+	return x;
 }
-
-
-Date Before(Date x, int n);
-
 
 void main(){
 
 	Date x=DateOf(2021,1,14);
-	int n= 14;
+	int n= 34;
 
 	Date after;
+	Date before;
 
 	printf("%d.%02d.%02d\n",x.year,x.month,x.day);
 
 	after = After(x,n);
 	printf("%d.%02d.%02d\n",after.year,after.month,after.day);
-
+	
+	before = Before(x,n);
+	printf("%d.%02d.%02d\n",before.year,before.month,before.day);
 }
 
