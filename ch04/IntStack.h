@@ -16,7 +16,7 @@ int Pop(IntStack *s, int *x);
 
 int Peek(const IntStack *s, int *x);
 
-int Clear(IntStack *s);
+void Clear(IntStack *s);
 
 int Capacity(const IntStack *s);
 
@@ -28,7 +28,7 @@ int ISFull(const IntStack *s);
 
 int Search(const IntStack *s, int x);
 
-int Print(const IntStack *s);
+void Print(const IntStack *s);
 
 void Terminate(IntStack *s);
 #endif
