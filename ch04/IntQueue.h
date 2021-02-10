@@ -9,7 +9,7 @@ typedef struct {
 	int *que;
 } IntQueue;
 
-int Initilize(IntQueue *q, int max);
+int Initialize(IntQueue *q, int max);
 
 int Enque(IntQueue *q, int x);
 

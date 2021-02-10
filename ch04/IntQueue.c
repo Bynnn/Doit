@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include"IntQueue.h"
 
-int Initilize(IntQueue *q, int m)
+int Initialize(IntQueue *q, int max)
 {
 	q->num=q->front=q->rear=0;
 	if((q->que = calloc(max,sizeof(int))) == NULL)
@@ -10,7 +10,7 @@ int Initilize(IntQueue *q, int m)
 		q->max =0;
 		return -1;	//fail to create
 	}
-	q->max = m;
+	q->max = max;
 	return 0;
 }
 
@@ -46,7 +46,7 @@ int Peek(const IntQueue *q, int *x)
 {
 	if(q->num <= 0)
                 return -1;
-        &x = q->que[q->front];
+        *x = q->que[q->front];
 	return 0;
 }
 
@@ -78,9 +78,15 @@ int IsFull(const IntQueue *q)
 int Search(const IntQueue *q, int x)
 {
 	int i;
+	int index;
+
 	for(i=0;i<q->num;i++)
-		printf("%d", q->que[(i + q->front) % q->max]);
-	printf("\n\n")
+	{
+		index = (i + q->front) % q->max;
+		if(q->que[index]==x);
+		return index;
+	}
+	return -1;	// fail to search
 }
 		
 void Print(const IntQueue *q)
